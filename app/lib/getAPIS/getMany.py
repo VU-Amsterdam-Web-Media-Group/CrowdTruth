@@ -297,7 +297,7 @@ for iter in range(4, len(sys.argv), 2):
     data['content']['URL'] = ImURL
     Features = {}
     Features["classifier"] = []
-    try:
+    try:    
         file = cStringIO.StringIO(urllib.urlopen(ImURL).read())
         image = Image.open(file)
         val =  predict_adopted.predict("FLOWERS", image) / 100.0 
@@ -321,7 +321,7 @@ for iter in range(4, len(sys.argv), 2):
     Features = {}
     Features["classifier"] = []
     try:
-        
+    #test
         data['softwareAgent_configuration'] = "birds"
         #file = cStringIO.StringIO(urllib.urlopen(ImURL).read())
        # image = Image.open(file)
