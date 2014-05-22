@@ -11,6 +11,19 @@ class Entity extends Moloquent {
     protected static $unguarded = true;
     public static $snakeAttributes = false;
 
+    public static function getKeyLabelMapping() {
+        return [
+            "twrex-structured-sentence" => "Relex-structured sentence",
+            "keyframes" => "Key-frames",
+            "totalrelevantfeatures" => "Relevant Features",
+            "fullvideo" => "Full Video",
+            "documentType" => "Document Type",
+            "painting" => "Painting",
+            "drawing" => "Drawing",
+            "relation" => "Seed Relation"
+        ];
+    }
+
     public function __construct()
     {
         $this->filterResults();
@@ -72,13 +85,7 @@ class Entity extends Moloquent {
         static::saved(function($entity)
         {
 
-            if(isset($entity['tags']))
-            {
-                if(in_array("apiFeatures", $entity['tags']))
-                {
-                    \MongoDB\Temp::createImageCache();
-                }
-            }
+            \MongoDB\Temp::truncate();
 
             Cache::flush();
         });

@@ -22,4 +22,14 @@ class PagesController extends BaseController {
 	}
 
 
+	public function team()
+	{
+		return View::make('team');
+	}
+
+	public function apiExamples()
+	{
+		return View::make('api_examples');
+	}
+
 }

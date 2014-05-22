@@ -412,7 +412,11 @@ class apiController extends BaseController
     public function getAggregate()
     {
         $input = Input::all();
-        $selection = \MongoDB\Entity::raw(function ($collection) use ($input) {
+        $c = Input::get('collection', 'Entity');
+
+        $collection = $this->repository->returnCollectionObjectFor($c);
+
+        $selection = $collection->raw(function ($collection) use ($input) {
 
             $aggregateOperators = $this->processAggregateInput($input);
             //a constField field to create the lists
@@ -437,6 +441,40 @@ class apiController extends BaseController
         $results = $selection['result'][0];
         $results['query'] = Input::get('match');
         return $results;
+    }
+    public function getMetrics(){
+
+        $IDsQuery = \MongoDB\Entity::raw(function ($collection) {
+            $input = Input::all();
+            $aggregateOperators = $this->processAggregateInput($input);
+            $aggregateOperators['$group']['_id'] = 0;
+            $aggregateQuery = array();
+            foreach($this->pipelineList as $operator){
+                if(array_key_exists($operator, $aggregateOperators)) {
+                    array_push( $aggregateQuery, array($operator=>$aggregateOperators[$operator]));
+                }
+            }
+
+            return $collection->aggregate($aggregateQuery);
+        });
+
+        $c = Input::get('collection', 'Entity');
+
+        $collection = $this->repository->returnCollectionObjectFor($c);
+        $targetField = key(Input::get('push'));
+
+        if (count($IDsQuery['result']) == 0) {
+            $results = array();
+            foreach (Input::get('metrics') as $field => $value) {
+                $results[$value] = array();
+            }
+            return $results;
+        }
+
+        $IDsList = $IDsQuery['result'][0][$targetField];
+        $metricListNames = Input::get('metrics');
+        $metrics = $collection::whereIn('_id', $IDsList)->get($metricListNames)->toArray();
+        return $metrics;
     }
 
     public function getSpammers()
@@ -566,8 +604,11 @@ class apiController extends BaseController
 
     public function getUnitgraph()
     {
+        $c = Input::get('collection', 'Entity');
 
-        $selection = \MongoDB\Entity::raw(function ($collection) {
+        $collection = $this->repository->returnCollectionObjectFor($c);
+
+        $selection = $collection->raw(function ($collection) {
 
             $aggregateOperators = $this->processAggregateInput(Input::all());
 

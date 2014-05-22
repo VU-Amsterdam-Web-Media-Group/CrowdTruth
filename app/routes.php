@@ -7,22 +7,17 @@
 
 Route::group(array('before' => 'auth'), function()
 {
-
-
 	Route::controller('media/preprocess/fullvideo', 'preprocess\FullvideoController');
 	Route::controller('media/preprocess/twrex', 'preprocess\TwrexController');
 	Route::controller('media/preprocess/CSVresultController', 'preprocess\CSVresultController');
 	Route::controller('media', 'MediaController');
 
-	Route::controller('selection', 'SelectionController');
 	Route::controller('process', 'ProcessController');
 	Route::controller('jobs', 'JobsController');
 	Route::controller('workers', 'WorkersController');
     Route::controller('analyze','AnalyticsController');
     Route::controller('onlinesource', 'OnlineSourceController');
 	
-
-
 });
 
 Route::get('/', function()
@@ -33,7 +28,8 @@ Route::get('/', function()
 Route::get('home', 'PagesController@index');
 Route::get('info', 'PagesController@info');
 Route::get('papers', 'PagesController@papers');
-
+Route::get('team', 'PagesController@team');
+Route::get('api/examples', 'PagesController@apiExamples');
 Route::controller('api/v1', '\Api\v1\apiController');
 Route::controller('api/media', '\Api\media\apiController');
 Route::controller('api/search', '\Api\search\apiController');
