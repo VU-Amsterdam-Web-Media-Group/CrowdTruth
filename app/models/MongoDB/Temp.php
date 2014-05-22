@@ -38,7 +38,7 @@ class Temp extends Moloquent {
         $db = \DB::getMongoDB();
         $db = $db->temp;
 
-        \Queue::push('Queues\UpdateUnits', \MongoDB\Entity::whereIn('documentType', ['painting', 'drawing', 'picture'])->lists('_id'));
+        // \Queue::push('Queues\UpdateUnits', \MongoDB\Entity::whereIn('documentType', ['painting', 'drawing', 'picture'])->lists('_id'));
 
 		$result = \MongoDB\Entity::whereIn('documentType', ['painting', 'drawing', 'picture'])->get()->toArray();
 
@@ -47,6 +47,8 @@ class Temp extends Moloquent {
             foreach($result as &$parent)
             {
                 $children = \MongoDB\Entity::whereIn('parents', [$parent['_id']])->get(['recognizedFeatures', 'content.features'])->toArray();
+
+
 
                 $parent['content']['features'] = [];
                 $parent['totalRelevantFeatures'] = 0;
@@ -58,34 +60,50 @@ class Temp extends Moloquent {
                         $parent['totalRelevantFeatures'] = $parent['totalRelevantFeatures'] + count($child['recognizedFeatures']);
                     }
 
-                    $featureKey = key($child['content']['features']);
+                    
+                    foreach($child['content']['features'] as $k => $v){
+                        
 
-                    if(!isset($parent['content']['features'][$featureKey]))
-                    {
-                        $parent['content']['features'][$featureKey] = [];
-
-                        if(is_array($child['content']['features'][$featureKey]))
-                        {
-                            foreach($child['content']['features'][$featureKey] as $k => $v)
-                            {
-                                $parent['content']['features'][$featureKey][$k] = $v;
-                            }                           
-                        } 
-
-                    }
-                    else {
-                        if(is_array($child['content']['features'][$featureKey]))
-                        {
-                            foreach($child['content']['features'][$featureKey] as $k => $v)
-                            {
-                                $parent['content']['features'][$featureKey][$k] = $v;
-                            }
-                        } 
+                        if (array_key_exists($k, $parent['content']['features'])){
+                                if(! is_array($parent['content']['features'][$k])) 
+                                    $parent['content']['features'][$k] = [$parent['content']['features'][$k]];
+                                foreach($v as $vit)
+                                    array_push($parent['content']['features'][$k], $vit);
+                        }
                         else 
                         {
-                            $parent['content']['features'][$featureKey] = $child['content']['features'][$featureKey];
+                            $parent['content']['features'][$k] = $v;
                         }
                     }
+
+                    // $featureKey = key($child['content']['features']);
+
+                    // if(!isset($parent['content']['features'][$featureKey]))
+                    // {
+                    //     $parent['content']['features'][$featureKey] = [];
+
+                    //     if(is_array($child['content']['features'][$featureKey]))
+                    //     {
+                    //         foreach($child['content']['features'][$featureKey] as $k => $v)
+                    //         {
+                    //             $parent['content']['features'][$featureKey][$k] = $v;
+                    //         }                           
+                    //     } 
+
+                    // }
+                    // else {
+                    //     if(is_array($child['content']['features'][$featureKey]))
+                    //     {
+                    //         foreach($child['content']['features'][$featureKey] as $k => $v)
+                    //         {
+                    //             $parent['content']['features'][$featureKey][$k] = $v;
+                    //         }
+                    //     } 
+                    //     else 
+                    //     {
+                    //         $parent['content']['features'][$featureKey] = $child['content']['features'][$featureKey];
+                    //     }
+                    // }
                 }
             }
 

@@ -149,7 +149,7 @@
 			            	
 			              @{{#if  this.content.features.object}}
 				            	@{{#eachProperty this.content.features.object}}
-				            		@{{value.tag}}: @{{value.score}} <br>			            		
+				            		@{{value.label}}: @{{value.score}} <br>			            		
 				            	@{{/eachProperty}}
 
        			 		   @{{/if}}
@@ -162,20 +162,36 @@
 			            	@{{/if}}
 		            	</td>
 			            <td data-vbIdentifier="image_classifiers">
-			            	@{{#if this.content.features.Classifier}}
-				            	@{{#eachProperty this.content.features.Classifier }}
-				            		@{{key}}: @{{value}}
+			            	@{{#if this.content.features.classifier}}
+				            	@{{#eachProperty this.content.features.classifier }}
+				            		@{{value.label}}: @{{value.score}}
 			            		@{{/eachProperty}}
 		            		@{{/if}}
 	            	   </td>
-			            <td data-vbIdentifier="image_facesnum">@{{ this.content.features.FacesNumber}}    	</td>
+			           
+
+ 						
+						
+						<td data-vbIdentifier="image_facesnum">
+			            	@{{#if this.content.features.faces}}
+				            	@{{#eachProperty this.content.features.faces }}
+
+
+				            		@{{#is value.label "facesNumber"}}
+				            			@{{value.label}}: @{{value.score}}
+				            		@{{/is}}
+			            		@{{/eachProperty}}
+		            		@{{/if}}
+	            	   </td>
+
+
 			            <td data-vbIdentifier="image_colors">								    	
 				    		@{{#if this.content.features.ColorsMain}}
 				            	<table class="table table-striped table-condensed" style="height: 50px;">						    
 							    	<tbody>
 										<tr>
 								    			@{{#each this.content.features.ColorsMain }}
-													<td style='background:@{{ first this }}; width:@{{ last this }}%; padding: 0 0 0 0;' data-toggle="tooltip" data-placement="top" title=" @{{first this}}, @{{last this}}% ">
+													<td style='background:@{{ this.label }}; width:@{{ this.score }}%; padding: 0 0 0 0;' data-toggle="tooltip" data-placement="top" title=" @{{this.label}}, @{{this.score}}% ">
 														&nbsp;
 													</td>
 												@{{/each}}									
@@ -190,7 +206,7 @@
 							    	<tbody>
 										<tr>
 								    		@{{#each this.content.features.ColorsHistogram }}
-												<td style='background:@{{ first this }}; width:@{{ last this }}%; padding: 0 0 0 0;' data-toggle="tooltip" data-placement="top" title=" @{{first this}}, @{{last this}}% ">
+												<td style='background:@{{ this.label }}; width:@{{ this.score }}%; padding: 0 0 0 0;' data-toggle="tooltip" data-placement="top" title=" @{{this.label}}, @{{this.score}}% ">
 													&nbsp;
 												</td>
 											@{{/each}}									
