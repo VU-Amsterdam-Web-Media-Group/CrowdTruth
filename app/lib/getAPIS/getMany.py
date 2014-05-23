@@ -50,8 +50,9 @@ def closse(response):
         pass
 
 #### !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-url = 'http://localhost/api/media/test'
+#url = 'http://localhost/api/media/test'
 #url = 'http://crowdtruth.org/api/media/test'
+url = 'http://dev.crowdtruth.org/api/media/test'
 #### !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 headers = {'content-type': 'application/json'}

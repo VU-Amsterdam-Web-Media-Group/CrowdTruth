@@ -9,22 +9,22 @@
 					<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#" data-vb="show" data-vbSelector="image_id"></i>ID</a></li>
+						<li><a href="#" data-vb="hide" data-vbSelector="image_id"></i>ID</a></li>
 						<li><a href="#" data-vb="show" data-vbSelector="image_content"></i>Thumbnail</a></li>
 						<li><a href="#" data-vb="show" data-vbSelector="image_title"></i>Title</a></li>
-						<li><a href="#" data-vb="show" data-vbSelector="image_description"></i>Description</a></li>
+						<li><a href="#" data-vb="hide" data-vbSelector="image_description"></i>Description</a></li>
 						<li><a href="#" data-vb="show" data-vbSelector="image_author"></i>Author</a></li>
-						<li><a href="#" data-vb="show" data-vbSelector="image_domain"></i>Domain</a></li>
+						<li><a href="#" data-vb="hide" data-vbSelector="image_domain"></i>Domain</a></li>
 						<li><a href="#" data-vb="show" data-vbSelector="image_source"></i>Source</a></li>
 						<li><a href="#" data-vb="hide" data-vbSelector="image_url"></i>URL</a></li>
-						<li><a href="#" data-vb="show" data-vbSelector="image_width"></i>Width</a></li>
-						<li><a href="#" data-vb="show" data-vbSelector="image_height"></i>Height</a></li>
-						<li><a href="#" data-vb="hide" data-vbSelector="image_object"></i>Object</a></li>
-						<li><a href="#" data-vb="hide" data-vbSelector="image_scene"></i>Scene</a></li>
-						<li><a href="#" data-vb="hide" data-vbSelector="image_classifiers"></i>Classifiers</a></li>
-						<li><a href="#" data-vb="hide" data-vbSelector="image_facesnum"># of Faces</a></li>
-						<li><a href="#" data-vb="hide" data-vbSelector="image_colors">Main colors</a></li>
-						<li><a href="#" data-vb="hide" data-vbSelector="image_histogram"></i>Histogram</a></li>
+						<li><a href="#" data-vb="hide" data-vbSelector="image_width"></i>Width</a></li>
+						<li><a href="#" data-vb="hide" data-vbSelector="image_height"></i>Height</a></li>
+						<li><a href="#" data-vb="show" data-vbSelector="image_object"></i>Object</a></li>
+						<li><a href="#" data-vb="show" data-vbSelector="image_scene"></i>Scene</a></li>
+						<li><a href="#" data-vb="show" data-vbSelector="image_classifiers"></i>Classifiers</a></li>
+						<li><a href="#" data-vb="show" data-vbSelector="image_facesnum"># of Faces</a></li>
+						<li><a href="#" data-vb="show" data-vbSelector="image_colors">Main colors</a></li>
+						<li><a href="#" data-vb="show" data-vbSelector="image_histogram"></i>Histogram</a></li>
 						<li><a href="#" data-vb="hide" data-vbSelector="number_of_batches"></i>Used In # of Batches</a></li>
 						<li><a href="#" data-vb="hide" data-vbSelector="number_of_jobs"></i>Used In # of Jobs</a></li>
 						<li><a href="#" data-vb="hide" data-vbSelector="created_at"></i>Created At</a></li>
