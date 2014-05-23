@@ -22,6 +22,22 @@ Route::group(array('before' => 'auth'), function()
 
 Route::get('/', function()
 {
+
+    return Redirect::to('home');
+});
+
+Route::get('/urls', function()
+{
+	$results = \MongoDB\Entity::whereIn('documentType', ['painting', 'drawing'])->get(['content.url']);
+
+	foreach($results as $result)
+	{
+		echo $result['_id'] . PHP_EOL;
+		echo $result['content']['url'] . PHP_EOL;
+	}
+
+	exit;
+
     return Redirect::to('home');
 });
 

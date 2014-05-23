@@ -167,9 +167,9 @@
 			            	@{{/if}}
 		            	</td>
 			            <td data-vbIdentifier="image_classifiers">
-			            	@{{#if this.content.features.Classifier}}
-				            	@{{#eachProperty this.content.features.Classifier }}
-				            		@{{key}}: @{{value}}
+			            	@{{#if this.content.features.classifier}}
+				            	@{{#eachProperty this.content.features.classifier }}
+				            		@{{value.label}}: @{{value.score}}
 			            		@{{/eachProperty}}
 		            		@{{/if}}
 	            	   </td>

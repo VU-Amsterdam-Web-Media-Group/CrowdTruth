@@ -16,6 +16,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import smtplib
+from keys import getkey
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEBase import MIMEBase
 from email.MIMEText import MIMEText
@@ -32,7 +33,7 @@ if len(sys.argv) < 5:
 
 try:
     Cloud_key = "265111278284499"
-    Cloud_secret = "I62pcPP1G6UCRmm9al1A3KorgdU"   
+    Cloud_secret = getkey('cloudinary')   
 
     cloudinary.config( 
     cloud_name = "dnx94fr1w", 
@@ -104,7 +105,7 @@ for iter in range(4, len(sys.argv), 2):
 
     #####################   REKOGNITION   ####################################
     Reck_key = "kVnLUSqqaPlnpzdq"
-    Reck_secret = "smLk6SzFKAENwmc8"
+    Reck_secret = getkey('rekognition')
     data['softwareAgent_id'] = 'fr_rekognition'
     data['documentType'] = data['softwareAgent_id']
     data['softwareAgent_label'] = 'rekognition: [object, scene, faces]'
@@ -244,7 +245,7 @@ for iter in range(4, len(sys.argv), 2):
     
     ###############################   SKYBIOMETRY   ############################################  
     Sky_key = "7e544588316542b382d286988b83d679"
-    Sky_secret = "3bb713ca57b94c709d55c2add9d1c882"
+    Sky_secret = getkey('skybiometry')
     data['softwareAgent_id'] = 'fr_skybiometry'
     data['documentType'] = data['softwareAgent_id']
     data['softwareAgent_label'] = 'skybiometry: faces'
